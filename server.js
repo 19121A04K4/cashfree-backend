@@ -1,10 +1,9 @@
- const express = require("express");
+const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 8080;
-
+const PORT = process.env.PORT || 8080;
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -60,6 +59,8 @@ app.post("/create-payment-link", async (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
+ 
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
