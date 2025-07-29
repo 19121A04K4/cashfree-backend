@@ -55,6 +55,9 @@ app.post("/create-payment-link", async (req, res) => {
     res.status(500).json({ error: "Failed to create payment link" });
   }
 });
+app.get("/", (req, res) => {
+  res.send("✅ Cashfree backend is live!");
+});
 
  
 app.listen(port, () => {
