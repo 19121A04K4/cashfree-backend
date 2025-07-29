@@ -1,4 +1,7 @@
- const express = require("express");
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const app = express();
@@ -54,7 +57,8 @@ app.post("/create-payment-link", async (req, res) => {
     res.status(500).json({ error: "Failed to create payment link" });
   }
 });
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.get("/", (req, res) => {
+  res.send("✅ Cashfree backend is live!");
 });
+
+
