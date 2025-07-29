@@ -1,14 +1,20 @@
-const express = require("express");
+ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 3000;
+
+const port = process.env.PORT || 3000;  
 
 app.use(cors());
 app.use(express.json());
 
 const APP_ID = process.env.CASHFREE_APP_ID;
 const SECRET_KEY = process.env.CASHFREE_SECRET_KEY;
+
+
+app.get("/", (req, res) => {
+  res.send("Cashfree backend is running");
+});
 
 app.post("/create-payment-link", async (req, res) => {
   const { customerPhone, product, size, quantity } = req.body;
@@ -29,7 +35,7 @@ app.post("/create-payment-link", async (req, res) => {
           size,
           quantity,
         },
-        link_amount: 100, // You can change or calculate based on product/qty
+        link_amount: 100,  
         link_currency: "INR",
         link_purpose: `Order for ${product} (${size}) x${quantity}`,
       },
@@ -50,8 +56,7 @@ app.post("/create-payment-link", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
-
+ 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
