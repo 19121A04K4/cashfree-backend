@@ -1,22 +1,24 @@
-
-const express = require("express");
+ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-const app = express();
 
+const app = express();
 const port = process.env.PORT || 8080;
 
-
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Environment Variables
 const APP_ID = process.env.CASHFREE_APP_ID;
 const SECRET_KEY = process.env.CASHFREE_SECRET_KEY;
 
+// Health check route
 app.get("/", (req, res) => {
   res.send("✅ Cashfree backend is live!");
 });
 
+// Payment link route
 app.post("/create-payment-link", async (req, res) => {
   const { customerPhone, product, size, quantity } = req.body;
 
@@ -52,16 +54,12 @@ app.post("/create-payment-link", async (req, res) => {
 
     res.json({ link: response.data.link_url });
   } catch (error) {
-    console.error(error.response ? error.response.data : error.message);
+    console.error("Cashfree Error:", error.response?.data || error.message);
     res.status(500).json({ error: "Failed to create payment link" });
   }
 });
-app.get("/", (req, res) => {
-  res.send("✅ Cashfree backend is live!");
-});
+
+// Start server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });
-
-
-
