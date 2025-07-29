@@ -1,6 +1,4 @@
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
@@ -59,6 +57,9 @@ app.post("/create-payment-link", async (req, res) => {
 });
 app.get("/", (req, res) => {
   res.send("✅ Cashfree backend is live!");
+});
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
 
 
